@@ -4,15 +4,17 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+// @Component
+@Service
 public class EmployeeServiceImpl implements EmployeeService{
 	@Resource 
 	EmployeeDAO employeeDao;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public List<Employee> findAll() {
 		return employeeDao.findAll();

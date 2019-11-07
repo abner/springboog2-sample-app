@@ -33,11 +33,11 @@ NamedParameterJdbcTemplate template;
 
 
 @Override
-@Transactional(propagation = Propagation.REQUIRES_NEW)
-@Lock(LockModeType.PESSIMISTIC_WRITE)
+// @Transactional(propagation = Propagation.REQUIRES_NEW)
+// @Lock(LockModeType.PESSIMISTIC_WRITE)
 public List<Employee> findAll() {
 //return template.query("select * from employee for update;", new EmployeeRowMapper());
-TypedQuery<Employee> q = em.createQuery("select c from Employee c", Employee.class);
+TypedQuery<Employee> q = em.createQuery("select c from Employee c where employeeid = '1168178281'", Employee.class);
 q.setLockMode(LockModeType.PESSIMISTIC_READ);
 return q.getResultList();
 }

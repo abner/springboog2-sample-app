@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -25,11 +23,12 @@ public class ScheduledService {
     EmployeeService service;
 
     @Scheduled(fixedDelay = 25000L )
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    // @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+    @Transactional()
+    // @Lock(LockModeType.PESSIMISTIC_WRITE)
     public void doStuff() throws InterruptedException {
         // runService.doStuff();
-        DebugUtils.transactionRequired("ScheduledRun.doStuff");
+        //DebugUtils.transactionRequired("ScheduledService.doStuff");
         service.findAll();
         Thread.sleep(10000);
         Employee j = new Employee();
