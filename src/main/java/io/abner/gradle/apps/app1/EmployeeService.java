@@ -2,9 +2,6 @@ package io.abner.gradle.apps.app1;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 public interface EmployeeService {
 
 	
@@ -12,10 +9,10 @@ public interface EmployeeService {
 
 	void insertEmployee(Employee emp);
 
-	void updateEmployee(Employee emp);
+bootRun {
 
-	void executeUpdateEmployee(Employee emp);
+    if (project.hasProperty('args')) {
 
-	void deleteEmployee(Employee emp);
-	
-}
+        args project.args.split(',')
+    }
+}}
